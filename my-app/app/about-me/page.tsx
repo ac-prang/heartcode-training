@@ -1,5 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Homu from "@/app/assets/inucurry_homu.jpg";
+import Image from "next/image";
 
 export default function AboutMe() {
   return (
@@ -15,7 +17,7 @@ export default function AboutMe() {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-              {/* <image src = > */}
+            <Image src={Homu} width={300} alt="1"/>
                 <div className="flex flex-row gap-2">
                     <p className="font-bold">Name:</p>
                     Preston
