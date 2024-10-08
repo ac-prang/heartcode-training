@@ -4,12 +4,13 @@ import { ModeToggle } from "../mode-toggle";
 
 export function NavigationBar() {
     return (
-        <NavigationMenu className="list-none h-16">
+        <NavigationMenu className="flex flex-row justify-start min-w-full list-none h-16 sticky top-0 p-5">
+            <div className = "flex flex-row">
             <NavigationMenuItem>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                         Home
                     </NavigationMenuLink>
-            </NavigationMenuItem>
+            </NavigationMenuItem></div>
             <NavigationMenuItem>
                 <Link href="/quiz" legacyBehavior passHref>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
