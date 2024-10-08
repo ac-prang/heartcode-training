@@ -24,8 +24,10 @@ export default function AboutMe() {
                 <div className="flex flex-row gap-2"><p className="font-bold">Hobbies:</p>Music</div>
             </CardContent>
         </Card>
-        <AlertTitle>Heads up</AlertTitle>
-        <AlertDescription>I have added an alert</AlertDescription>
+        <Alert>
+          <AlertTitle>Heads up</AlertTitle>
+          <AlertDescription>I have added an alert</AlertDescription>
+        </Alert>
     </div>
   );
 }
