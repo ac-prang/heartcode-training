@@ -1,58 +1,91 @@
-// "use client"
+"use client"
 
-// import { zodResolver } from "@hookform/resolvers/zod"
-// import { useForm } from "react-hook-form"
-// import { z } from "zod"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 
-// import { Button } from "@/components/ui/button"
-// import {
-//   Form,
-//   FormControl,
-//   FormDescription,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage,
-// } from "@/components/ui/form"
-// import { Input } from "@/components/ui/input"
+const FormSchema = z.object({
+	name: z.string({
+    	required_error: "Please enter a name"
+	}).min(2, {
+    	message: "name must be more than 2 characters long"
+	}).max(20, {
+    	message: "name must be no longer than 20 characters"
+	}),
+	question1: z.string({
+    	required_error: "Please select an option"
+	})
+})
 
-// const formSchema = z.object({
-//   username: z.string().min(2, {
-//     message: "Username must be at least 2 characters.",
-//   }).max(10,{message:"Username must be at most 10 characters."})
-// })
+export default function Quiz() {
+	const { toast } = useToast();
 
-// export function ProfileForm() {
-//   // ...
+	const form = useForm<z.infer<typeof FormSchema>>({
+    	resolver: zodResolver(FormSchema)
+	})
 
-//   return (
-//     <Form {...form}>
-//       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-//         <FormField
-//           control={form.control}
-//           name="username"
-//           render={({ field }) => (
-//             <FormItem>
-//               <FormLabel>Username</FormLabel>
-//               <FormControl>
-//                 <Input placeholder="shadcn" {...field} />
-//               </FormControl>
-//               <FormDescription>
-//                 This is your public display name.
-//               </FormDescription>
-//               <FormMessage />
-//             </FormItem>
-//           )}
-//         />
-//         <Button type="submit">Submit</Button>
-//       </form>
-//     </Form>
-//   )
-// }
+	function onSubmit(data: z.infer<typeof FormSchema>) {
+        if (data.question1 == "yes"){
+    	toast({
+        	title: `Congratulations ${data.name}`,
+        	description: "You know the business and I know the chemistry, I'm thinking maybe you and I could partner up",
+    	})}
+        else{
+        toast({
+            title: `Thank you ${data.name}`,
+            description: "Unfortunately, you are not a drug dealer.",
+        })
+        }
+    	console.log(data);
+	}
 
+	return (
+    	<Form {...form}>
+        	<form onSubmit={form.handleSubmit(onSubmit)} className="w2/3 space-y-6">
+            	<FormField
+                	control={form.control}
+                	name="name"
+                	render={({ field }) => (
+                    	<FormItem>
+                        	<FormLabel>Question 1:</FormLabel>
+                        	<FormDescription>What is your name?</FormDescription>
+                            	<FormControl>
+                                	<Input placeholder="your name here" {...field}/>
+                            	</FormControl>
+                        	<FormMessage/>
+                    	</FormItem>
+                	)}
+            	/>
+            	<FormField
+                	control={form.control}
+                	name="question1"
+                	render={({ field }) => (
+                    	<FormItem>
+                        	<FormLabel>Question 2:</FormLabel>
+                        	<FormDescription>Do you sell drugs?</FormDescription>
+                        	<Select onValueChange={field.onChange} defaultValue={field.value}>
+                            	<FormControl>
+                                	<SelectTrigger>
+                                    	<SelectValue placeholder="Please select an answer"/>
+                                	</SelectTrigger>
+                            	</FormControl>
+                            	<SelectContent>
+                                	<SelectItem value="yes">Yes</SelectItem>
+                                	<SelectItem value="no">No</SelectItem>
+                            	</SelectContent>
+                        	</Select>
+                        	<FormMessage/>
+                    	</FormItem>
+                	)}
+            	/>
+            	<Button type="submit">Submit</Button>
+        	</form>
+    	</Form>
+	)
+}
 
-// export default function Quiz() {
-//     console.log("Hello World")
-
-//     return (  <div>Hello World! This is the quiz page</div>);
-//   }
