@@ -13,7 +13,7 @@ export default function AboutMe() {
                     Hello I am Preston
                 </CardTitle>
                 <CardDescription>
-                    I like to code lots
+                    I like music & art
                 </CardDescription>
             </CardHeader>
             <CardContent>
