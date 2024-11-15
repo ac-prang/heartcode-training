@@ -1,7 +1,7 @@
 import { FlipWords } from "@/components/ui/flip-words";
 
 export default function Home() {
-  const words: string[] = ["Blue Sky", "some Grass", "that good shit"];
+  const words: string[] = ["fun", "to learn", "some knowledge"];
 
   return (
 	<div>

@@ -32,13 +32,13 @@ export default function Quiz() {
 	function onSubmit(data: z.infer<typeof FormSchema>) {
         if (data.question1 == "yes"){
     	toast({
-        	title: `Congratulations ${data.name}`,
-        	description: "You know the business and I know the chemistry, I'm thinking maybe you and I could partner up",
+        	title: `Thank you ${data.name}`,
+        	description: "Unfortunately, you are a drug dealer.",
     	})}
         else{
         toast({
             title: `Thank you ${data.name}`,
-            description: "Unfortunately, you are not a drug dealer.",
+            description: "Fortunately, you are not a drug dealer.",
         })
         }
     	console.log(data);
